@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">FitSquad Hub - Workout Logs</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+</head>
+<body>
+
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <main class="container my-5">
+
+        <div class="text-center mb-4">
+            <h1 class="display-6 fw-bold text-white tracking-tight" th:text="${pageTitle}">Workout Logs</h1>
+            <p class="text-secondary small">Every session logged by the squad.</p>
+        </div>
+
+        <!-- Empty state -->
+        <div th:if="${#lists.isEmpty(workoutLogs)}" class="alert alert-info text-center py-4">
+            <i class="bi bi-info-circle fs-3 d-block mb-2"></i>
+            <h5>No Workouts Logged Yet</h5>
+            <p>Be the first squad member to complete a quest!</p>
+            <a th:href="@{/log-workout}" class="btn btn-primary rounded-pill mt-2">Log First Workout</a>
+        </div>
+
+        <!-- Logs table -->
+        <div th:unless="${#lists.isEmpty(workoutLogs)}" class="form-card">
+            <div class="table-responsive">
+                <table class="table table-dark table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Athlete</th>
+                            <th>Challenge</th>
+                            <th>Date</th>
+                            <th>Duration</th>
+                            <th>Calories</th>
+                            <th>Intensity</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="log : ${workoutLogs}">
+                            <td class="fw-semibold" th:text="${log.athleteName}">Athlete</td>
+                            <td th:text="${log.challengeTitle}">Challenge</td>
+                            <td th:text="${log.workoutDate}">2026-01-01</td>
+                            <td th:text="${log.durationMinutes} + ' min'">45 min</td>
+                            <td th:text="${log.caloriesBurned} + ' kcal'">350 kcal</td>
+                            <td>
+                                <span class="badge rounded-pill"
+                                      th:text="${log.intensityLevel}"
+                                      th:classappend="${log.intensityLevel == 'Low'} ? 'bg-success' :
+                                                      (${log.intensityLevel == 'Moderate'} ? 'bg-info text-dark' :
+                                                      (${log.intensityLevel == 'High'} ? 'bg-warning text-dark' : 'bg-danger'))">
+                                    Intensity
+                                </span>
+                            </td>
+                            <td class="text-secondary small"
+                                th:text="${#strings.isEmpty(log.notes)} ? '—' : ${log.notes}">Notes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+	
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
