@@ -34,8 +34,7 @@ public class WorkoutChallengeController {
     public String showCreateForm(Model model) {
         model.addAttribute("challenge", new Challenge());
         model.addAttribute("categories", challengeService.getCategories());
-        model.addAttribute("difficulties", challengeService.getDifficulties());
-        model.addAttribute("pageTitle", "FitSquad Hub - Create New Challenge");
+        model.addAttribute("difficulties", challengeService.getDifficulties());        model.addAttribute("pageTitle", "FitSquad Hub - Create New Challenge");
         return "create-challenge";
     }
 
