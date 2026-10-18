@@ -21,26 +21,8 @@
 </head>
 <body>
 
-    <!-- Navigation Header -->
-    <nav class="navbar navbar-expand-lg glass-nav sticky-top">
-        <div class="container py-1">
-            <a class="navbar-brand d-flex align-items-center gap-2 text-white fw-bold" href="#" th:href="@{/challenges}">
-                <span class="brand-logo-icon text-white">
-                    <i class="bi bi-lightning-charge-fill fs-5"></i>
-                </span>
-                <span class="fs-4 tracking-tight">FitSquad<span class="text-gradient">Hub</span></span>
-            </a>
-
-            <div class="d-flex align-items-center gap-3">
-                <span class="badge bg-dark-subtle border border-secondary-subtle px-3 py-2 rounded-pill text-light fw-normal">
-                    <i class="bi bi-award me-1 text-warning"></i> Season 1 &bull; Week 1
-                </span>
-                <a href="#challenge-catalog" class="btn btn-sm btn-outline-light rounded-pill px-3">
-                    <i class="bi bi-grid-fill me-1"></i> Catalog
-                </a>
-            </div>
-        </div>
-    </nav>
+    <!-- Navigation Header Fragment -->
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
 
     <!-- Main Container -->
     <main class="container">
@@ -50,8 +32,8 @@
             <div class="row align-items-center g-4">
                 <div class="col-lg-8">
                     <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-dark border border-secondary-subtle text-secondary small mb-3">
-                        <span class="badge bg-primary rounded-pill">MVC Week 1</span>
-                        <span>Spring Boot &bull; Thymeleaf &bull; Dynamic Views</span>
+                        <span class="badge bg-primary rounded-pill">MVC Week 2</span>
+                        <span>Spring Boot &bull; Form Processing &bull; Bean Validation</span>
                     </div>
                     <h1 class="display-5 fw-extrabold text-white tracking-tight mb-3" th:text="${pageTitle}">
                         FitSquad Hub - Fitness Challenge Platform
@@ -59,6 +41,17 @@
                     <p class="lead text-secondary col-lg-10 mb-4">
                         Push your boundaries, log workout progress, and earn squad prestige. Explore our community-driven fitness challenges crafted for all disciplines.
                     </p>
+                    <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start mb-3">
+                        <a th:href="@{/create-challenge}" class="btn btn-join px-4 py-2 rounded-pill">
+                            <i class="bi bi-plus-circle-fill me-1"></i> Create Challenge
+                        </a>
+                        <a th:href="@{/log-workout}" class="btn btn-outline-light px-4 py-2 rounded-pill">
+                            <i class="bi bi-fire text-warning me-1"></i> Log Workout
+                        </a>
+                        <a th:href="@{/workout-logs}" class="btn btn-outline-secondary px-3 py-2 rounded-pill">
+                            <i class="bi bi-journal-check me-1"></i> Community Logs
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Stats Summary Panel demonstrating #lists.size() -->

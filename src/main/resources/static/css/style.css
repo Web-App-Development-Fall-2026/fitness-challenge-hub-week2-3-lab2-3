@@ -215,3 +215,66 @@ body {
     background: rgba(255, 255, 255, 0.07);
     color: var(--text-secondary);
 }
+
+/* Form Card & Form Elements */
+.form-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 2.2rem;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.form-control-dark, .form-select-dark {
+    background-color: rgba(15, 23, 42, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: var(--text-primary) !important;
+    border-radius: 10px;
+    padding: 0.65rem 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.form-control-dark:focus, .form-select-dark:focus {
+    background-color: rgba(15, 23, 42, 0.95) !important;
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25) !important;
+    color: #fff !important;
+}
+
+.form-control-dark.is-invalid, .form-select-dark.is-invalid {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25) !important;
+}
+
+.invalid-feedback-custom {
+    color: #f87171;
+    font-size: 0.8rem;
+    margin-top: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.table-dark-custom {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--text-primary);
+    border-color: var(--card-border);
+}
+
+.table-dark-custom th {
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+}
+
+.table-dark-custom td {
+    padding: 1.1rem 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
