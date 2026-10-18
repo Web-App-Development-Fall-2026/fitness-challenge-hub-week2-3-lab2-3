@@ -427,3 +427,33 @@ Define scoped variables to simplify repetitive checks:
 3. **Empty Collection Defense**: Pair `th:if="${#lists.isEmpty(challenges)}"` with `th:unless="${#lists.isEmpty(challenges)}"` to ensure your UI handles empty database responses gracefully.
 4. **Data Safety**: Stick to `th:text` for titles and user goals to prevent XSS. Only use `th:utext` if you explicitly support sanitized rich text descriptions.
 5. **Separation of Concerns**: Keep business calculations (e.g. XP computation, challenge queries) in `WorkoutChallengeController` or a service class rather than complex Thymeleaf expressions.
+
+
+
+### Thymeleaf Reference Quick Table
+
+| Attribute | Purpose |
+| :--- | :--- |
+| `th:text` | Display variable (escaped HTML) |
+| `th:utext` | Display variable (raw HTML) |
+| `th:href` | Generate URLs |
+| `th:src` | Bind image/resource URLs |
+| `th:value` | Bind form input values |
+| `th:each` | Loop through collections |
+| `th:if` | Conditional rendering (true) |
+| `th:unless` | Conditional rendering (false) |
+| `th:switch` / `th:case` | Multiple conditions |
+| `th:object` | Bind form to model object |
+| `th:field` | Bind form input to model field |
+| `th:errors` | Display field validation errors |
+| `th:class` | Conditional CSS classes |
+| `th:style` | Conditional inline styles |
+| `th:with` | Define local variables |
+| `th:insert` | Include fragment as child |
+| `th:replace` | Replace element with fragment |
+
+**Expressions:**
+- `@{}` : URL expression
+- `${}` : Variable expression
+- `*{}` : Object variable expression
+- `#{}` : Utility object expression
