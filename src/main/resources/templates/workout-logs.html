@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Workout Logs - FitSquad Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<main class="container py-5">
+
+    <h2 class="mb-4">Workout Logs Dashboard</h2>
+
+    <!-- Empty State -->
+    <div th:if="${#lists.isEmpty(workoutLogs)}"
+         class="alert alert-info text-center py-4">
+
+        <i class="bi bi-info-circle fs-3 d-block mb-2"></i>
+        <h5>No Workouts Logged Yet</h5>
+        <p>Be the first squad member to complete a quest!</p>
+
+        <a th:href="@{/log-workout}"
+           class="btn btn-primary rounded-pill mt-2">
+            Log First Workout
+        </a>
+    </div>
+
+    <!-- Workout Logs Table -->
+    <div th:unless="${#lists.isEmpty(workoutLogs)}"
+         class="table-responsive">
+
+        <table class="table table-striped table-bordered align-middle">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Athlete Name</th>
+                    <th>Challenge Title</th>
+                    <th>Workout Date</th>
+                    <th>Duration</th>
+                    <th>Calories Burned</th>
+                    <th>Intensity</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="log : ${workoutLogs}">
+
+                    <td th:text="${log.athleteName}"></td>
+
+                    <td th:text="${log.challengeTitle}"></td>
+
+                    <td th:text="${log.workoutDate}"></td>
+
+                    <td th:text="${log.durationMinutes} + ' min'"></td>
+
+                    <td th:text="${log.caloriesBurned} + ' kcal'"></td>
+
+                    <td>
+                        <span class="badge"
+                              th:classappend="${log.intensityLevel == 'Low'} ? 'bg-success' : (${log.intensityLevel == 'Moderate'} ? 'bg-info text-dark' : (${log.intensityLevel == 'High'} ? 'bg-warning text-dark' : 'bg-danger'))"
+                              th:text="${log.intensityLevel}">
+                        </span>
+                    </td>
+
+                    <td th:text="${log.notes}"></td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a th:href="@{/log-workout}"
+       class="btn btn-primary mt-3">
+        Log Another Workout
+    </a>
+
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
