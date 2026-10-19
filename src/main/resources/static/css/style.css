@@ -278,3 +278,5 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+
+.workout-notes { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 24rem; }
