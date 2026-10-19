@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">Workout Logs</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+</head>
+<body>
+
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <main class="container my-5">
+
+        <section class="mb-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                <div>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-dark border border-secondary-subtle text-secondary small mb-3">
+                        <span class="badge bg-primary rounded-pill">CPAN-228</span>
+                        <span>Lab 2 &bull; Workout Tracking</span>
+                    </div>
+
+                    <h1 class="display-6 fw-bold text-white tracking-tight mb-2">
+                        Workout <span class="text-gradient">Logs</span>
+                    </h1>
+
+                    <p class="text-secondary mb-0">
+                        Track your squad's workouts and fitness progress.
+                    </p>
+                </div>
+
+                <div>
+                    <a th:href="@{/log-workout}"
+                       class="btn btn-join rounded-pill px-4 py-2">
+                        <i class="bi bi-plus-circle-fill me-1"></i>
+                        Log a Workout
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="stats-badge-card d-flex align-items-center justify-content-between mb-4">
+            <div class="d-flex align-items-center gap-3">
+                <div class="rounded-circle p-3 bg-primary bg-opacity-10 text-info">
+                    <i class="bi bi-journal-check fs-4"></i>
+                </div>
+
+                <div>
+                    <div class="text-secondary small">Total Workouts</div>
+                    <div class="h4 fw-bold text-white mb-0"
+                         th:text="${#lists.size(workoutLogs)}">0</div>
+                </div>
+            </div>
+
+            <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-3 py-2">
+                Community Progress
+            </span>
+        </div>
+
+        <div th:if="${#lists.isEmpty(workoutLogs)}"
+             class="text-center py-5 rounded-4 border border-secondary border-opacity-25 bg-dark bg-opacity-25">
+
+            <i class="bi bi-inbox fs-1 text-muted d-block mb-3"></i>
+
+            <h2 class="h4 fw-bold text-white mb-2">
+                No Workouts Logged Yet
+            </h2>
+
+            <p class="text-secondary mb-4">
+                Be the first squad member to complete a quest!
+            </p>
+
+            <a th:href="@{/log-workout}"
+               class="btn btn-join rounded-pill px-4 py-2">
+                <i class="bi bi-fire me-1"></i>
+                Log Your First Workout
+            </a>
+        </div>
+
+        <div th:unless="${#lists.isEmpty(workoutLogs)}"
+             class="form-card p-0 overflow-hidden">
+
+            <div class="p-4 border-bottom border-secondary border-opacity-25">
+                <h2 class="h5 fw-bold text-white mb-1">Community Activity</h2>
+                <p class="text-secondary small mb-0">
+                    Review the workout records submitted by squad members.
+                </p>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-dark table-hover align-middle mb-0">
+                    <thead>
+                        <tr class="text-secondary small text-uppercase">
+                            <th scope="col" class="px-4 py-3">Athlete</th>
+                            <th scope="col" class="py-3">Challenge</th>
+                            <th scope="col" class="py-3">Workout Date</th>
+                            <th scope="col" class="py-3">Duration</th>
+                            <th scope="col" class="py-3">Calories</th>
+                            <th scope="col" class="py-3">Intensity</th>
+                            <th scope="col" class="px-4 py-3">Notes</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="log : ${workoutLogs}">
+                            <td class="px-4 py-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="rounded-circle bg-primary bg-opacity-25 text-info d-flex align-items-center justify-content-center"
+                                         style="width: 38px; height: 38px; min-width: 38px;">
+                                        <i class="bi bi-person-fill"></i>
+                                    </div>
+
+                                    <span class="fw-semibold text-white"
+                                          th:text="${log.athleteName}">
+                                        Athlete Name
+                                    </span>
+                                </div>
+                            </td>
+
+                            <td class="py-3">
+                                <span class="text-light"
+                                      th:text="${log.challengeTitle}">
+                                    Challenge Title
+                                </span>
+                            </td>
+
+                            <td class="py-3">
+                                <span class="text-secondary"
+                                      th:text="${log.workoutDate}">
+                                    2026-01-01
+                                </span>
+                            </td>
+
+                            <td class="py-3">
+                                <span class="text-light fw-semibold"
+                                      th:text="${log.durationMinutes} + ' min'">
+                                    30 min
+                                </span>
+                            </td>
+
+                            <td class="py-3">
+                                <span class="text-warning fw-semibold"
+                                      th:text="${log.caloriesBurned} + ' kcal'">
+                                    250 kcal
+                                </span>
+                            </td>
+
+                            <td class="py-3">
+                                <span class="badge rounded-pill px-3 py-2"
+                                      th:classappend="${log.intensityLevel == 'Low' ? ' bg-success-subtle text-success' : (log.intensityLevel == 'Moderate' ? ' bg-info-subtle text-info' : (log.intensityLevel == 'High' ? ' bg-warning-subtle text-warning' : ' bg-danger-subtle text-danger'))}"
+                                      th:text="${log.intensityLevel}">
+                                    Moderate
+                                </span>
+                            </td>
+
+                            <td class="px-4 py-3">
+                                <span class="text-secondary small"
+                                      th:text="${#strings.isEmpty(log.notes) ? '—' : log.notes}">
+                                    —
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-4">
+            <a th:href="@{/challenges}"
+               class="btn btn-outline-secondary rounded-pill px-4">
+                <i class="bi bi-arrow-left me-1"></i>
+                Back to Challenges
+            </a>
+
+            <a th:href="@{/log-workout}"
+               class="btn btn-join rounded-pill px-4">
+                <i class="bi bi-plus-circle me-1"></i>
+                Add Workout
+            </a>
+        </div>
+
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -12,7 +12,7 @@
 
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
@@ -26,7 +26,7 @@
 
     <!-- Main Container -->
     <main class="container">
-        
+
         <!-- Hero Section -->
         <section class="hero-section text-center text-md-start">
             <div class="row align-items-center g-4">
@@ -35,19 +35,24 @@
                         <span class="badge bg-primary rounded-pill">MVC Week 2</span>
                         <span>Spring Boot &bull; Form Processing &bull; Bean Validation</span>
                     </div>
+
                     <h1 class="display-5 fw-extrabold text-white tracking-tight mb-3" th:text="${pageTitle}">
                         FitSquad Hub - Fitness Challenge Platform
                     </h1>
+
                     <p class="lead text-secondary col-lg-10 mb-4">
                         Push your boundaries, log workout progress, and earn squad prestige. Explore our community-driven fitness challenges crafted for all disciplines.
                     </p>
+
                     <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start mb-3">
                         <a th:href="@{/create-challenge}" class="btn btn-join px-4 py-2 rounded-pill">
                             <i class="bi bi-plus-circle-fill me-1"></i> Create Challenge
                         </a>
+
                         <a th:href="@{/log-workout}" class="btn btn-outline-light px-4 py-2 rounded-pill">
                             <i class="bi bi-fire text-warning me-1"></i> Log Workout
                         </a>
+
                         <a th:href="@{/workout-logs}" class="btn btn-outline-secondary px-3 py-2 rounded-pill">
                             <i class="bi bi-journal-check me-1"></i> Community Logs
                         </a>
@@ -92,6 +97,7 @@
                                         <div class="text-muted" style="font-size: 0.75rem;">Live registration open for active challenges</div>
                                     </div>
                                 </div>
+
                                 <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1">
                                     Live
                                 </span>
@@ -130,11 +136,11 @@
         <!-- Challenges Grid (Demonstrating th:unless and th:each) -->
         <div th:unless="${#lists.isEmpty(challenges)}" class="row g-4">
             <div class="col-12 col-md-6 col-lg-4" th:each="challenge : ${challenges}">
-                
+
                 <!-- Challenge Card with dynamic class append -->
                 <div class="card h-100 challenge-card"
                      th:classappend="${challenge.active ? 'active-border' : 'inactive-card'}">
-                    
+
                     <!-- Card Media / Thumbnail -->
                     <div class="card-img-wrapper">
                         <!-- Demonstrating th:src, th:alt, and image fallback -->
@@ -143,7 +149,7 @@
                              class="challenge-img"
                              loading="lazy"
                              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80';">
-                        
+
                         <div class="img-overlay"></div>
 
                         <!-- Category Badge -->
@@ -155,13 +161,13 @@
                         <!-- Status Badge (Demonstrating th:if and th:unless) -->
                         <div class="status-floating-badge">
                             <!-- th:if: rendered when challenge is active -->
-                            <span th:if="${challenge.active}" 
+                            <span th:if="${challenge.active}"
                                   class="badge bg-success-subtle text-success border border-success-subtle px-3 py-1 rounded-pill fw-medium">
                                 <i class="bi bi-circle-fill me-1 small animate-pulse"></i> Active
                             </span>
-                            
+
                             <!-- th:unless: rendered when challenge is NOT active -->
-                            <span th:unless="${challenge.active}" 
+                            <span th:unless="${challenge.active}"
                                   class="badge bg-secondary-subtle text-light-emphasis border border-secondary-subtle px-3 py-1 rounded-pill fw-medium">
                                 <i class="bi bi-clock-history me-1"></i> Upcoming
                             </span>
@@ -171,12 +177,12 @@
                     <!-- Card Content Body -->
                     <div class="card-body p-4 d-flex flex-column justify-content-between">
                         <div>
-                            <!-- Header Row: Title & Difficulty Badge (Demonstrating th:classappend) -->
+                            <!-- Header Row: Title & Difficulty Badge -->
                             <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
                                 <h3 class="h5 fw-bold text-white mb-0 text-truncate" th:text="${challenge.title}">
                                     Challenge Title
                                 </h3>
-                                
+
                                 <span class="badge rounded-pill fw-semibold text-uppercase"
                                       style="font-size: 0.68rem; letter-spacing: 0.5px;"
                                       th:classappend="${challenge.difficulty == 'Beginner' ? 'diff-badge-beginner' : (challenge.difficulty == 'Intermediate' ? 'diff-badge-intermediate' : 'diff-badge-advanced')}"
@@ -209,6 +215,7 @@
                                     <i class="bi bi-calendar-event text-info"></i>
                                     <span class="text-light fw-medium" th:text="${challenge.durationDays} + ' Days'">30 Days</span>
                                 </div>
+
                                 <div class="d-flex align-items-center gap-1">
                                     <i class="bi bi-trophy-fill text-warning"></i>
                                     <span class="text-warning fw-bold" th:text="${challenge.rewardPoints} + ' XP'">500 XP</span>
@@ -218,17 +225,17 @@
                             <!-- Action Buttons demonstrating th:if and th:unless -->
                             <div class="mt-auto">
                                 <!-- When Active: Join Button -->
-                                <button th:if="${challenge.active}" 
-                                        type="button" 
+                                <button th:if="${challenge.active}"
+                                        type="button"
                                         class="btn btn-join w-100 fw-semibold rounded-3 py-2 d-flex align-items-center justify-content-center gap-2">
                                     <i class="bi bi-play-circle-fill"></i>
                                     <span>Join Challenge</span>
                                 </button>
 
                                 <!-- When Inactive: Enrollment Closed -->
-                                <button th:unless="${challenge.active}" 
-                                        type="button" 
-                                        class="btn btn-closed w-100 fw-semibold rounded-3 py-2 d-flex align-items-center justify-content-center gap-2" 
+                                <button th:unless="${challenge.active}"
+                                        type="button"
+                                        class="btn btn-closed w-100 fw-semibold rounded-3 py-2 d-flex align-items-center justify-content-center gap-2"
                                         disabled>
                                     <i class="bi bi-lock-fill"></i>
                                     <span>Opening Soon</span>
@@ -244,17 +251,8 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="container text-center mt-5 pt-4 border-top border-secondary border-opacity-25 text-secondary small">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
-            <div>
-                &copy; 2026 <span class="text-light fw-semibold">FitSquad Hub</span> &bull; Empowering Fitness Communities.
-            </div>
-            <div class="text-muted">
-                Spring Boot MVC &bull; Week 1 &bull; Thymeleaf Engine
-            </div>
-        </div>
-    </footer>
+    <!-- Footer Fragment -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
 
     <!-- Bootstrap 5.3 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
