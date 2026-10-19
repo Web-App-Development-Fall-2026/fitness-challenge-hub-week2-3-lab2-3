@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Workout</title>
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #0f172a, #080d16, #06232d);
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 45px auto;
+            padding: 35px;
+            background: rgba(22, 34, 51, 0.95);
+            border: 1px solid #29384b;
+            border-radius: 20px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #818cf8, #06b6d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .container > p {
+            color: #94a3b8;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #dbeafe;
+        }
+
+        input,
+        select,
+        textarea {
+            display: block;
+            width: 100%;
+            padding: 13px 14px;
+            margin-top: 5px;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            background: #0f172a;
+            color: #f8fafc;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #06b6d4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #64748b;
+        }
+
+        input[type="date"] {
+            color-scheme: dark;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #6366f1, #06b6d4);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.25);
+        }
+
+        a {
+            color: #67e8f9;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #a5f3fc;
+            text-decoration: underline;
+        }
+
+        .error {
+            color: #fca5a5;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px 14px;
+                padding: 22px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Log Your Workout</h1>
+
+    <form th:action="@{/log-workout}"
+          th:object="${workoutLog}" method="post">
+
+        <label for="athleteName">Athlete Name</label>
+        <input type="text" id="athleteName" th:field="*{athleteName}">
+        <p class="error" th:errors="*{athleteName}"></p>
+
+        <label for="workoutType">Workout Type</label>
+        <select id="workoutType" th:field="*{workoutType}">
+            <option value="">Select Workout</option>
+            <option value="Running">Running</option>
+            <option value="Weight Training">Weight Training</option>
+            <option value="Cycling">Cycling</option>
+            <option value="Swimming">Swimming</option>
+            <option value="Walking">Walking</option>
+        </select>
+        <p class="error" th:errors="*{workoutType}"></p>
+
+        <label for="durationMinutes">Duration (Minutes)</label>
+        <input type="number" id="durationMinutes"
+               th:field="*{durationMinutes}" min="1">
+        <p class="error" th:errors="*{durationMinutes}"></p>
+
+        <label for="caloriesBurned">Calories Burned</label>
+        <input type="number" id="caloriesBurned"
+               th:field="*{caloriesBurned}" min="0">
+        <p class="error" th:errors="*{caloriesBurned}"></p>
+
+        <label for="workoutDate">Workout Date</label>
+        <input type="date" id="workoutDate" th:field="*{workoutDate}">
+        <p class="error" th:errors="*{workoutDate}"></p>
+
+        <label for="notes">Notes</label>
+        <textarea id="notes" th:field="*{notes}" rows="3"></textarea>
+        <p class="error" th:errors="*{notes}"></p>
+
+        <button type="submit">Save Workout</button>
+    </form>
+
+    <p><a th:href="@{/workout-logs}">View All Workouts</a></p>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
