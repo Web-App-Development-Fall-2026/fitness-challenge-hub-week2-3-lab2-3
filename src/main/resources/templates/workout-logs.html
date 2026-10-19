@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Dashboard</title>
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #0f172a, #080d16, #06232d);
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 45px auto;
+            padding: 30px;
+            background: rgba(22, 34, 51, 0.95);
+            border: 1px solid #29384b;
+            border-radius: 20px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 32px;
+            background: linear-gradient(90deg, #818cf8, #06b6d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .button {
+            display: inline-block;
+            margin: 10px 0 25px;
+            padding: 13px 22px;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #6366f1, #06b6d4);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.25);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            background: #111c2d;
+            border-radius: 12px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #29384b;
+            text-align: left;
+        }
+
+        th {
+            background: #1e2b43;
+            color: #67e8f9;
+            font-size: 14px;
+        }
+
+        td {
+            color: #e2e8f0;
+            font-size: 14px;
+        }
+
+        tbody tr:hover {
+            background: #1b2a40;
+        }
+
+        .container > div > p {
+            padding: 20px;
+            background: #111c2d;
+            border-radius: 10px;
+            color: #94a3b8;
+        }
+
+        a {
+            color: #67e8f9;
+        }
+
+        @media (max-width: 750px) {
+            .container {
+                margin: 20px 12px;
+                padding: 18px;
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 700px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Workout Dashboard</h1>
+
+    <a class="button" th:href="@{/log-workout}">
+        Log a New Workout
+    </a>
+
+    <div th:if="${#lists.isEmpty(workoutLogs)}">
+        <p>No workouts have been logged yet.</p>
+    </div>
+
+    <table th:unless="${#lists.isEmpty(workoutLogs)}">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Athlete</th>
+            <th>Workout Type</th>
+            <th>Duration</th>
+            <th>Calories Burned</th>
+            <th>Date</th>
+            <th>Notes</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="log : ${workoutLogs}">
+            <td th:text="${log.id}"></td>
+            <td th:text="${log.athleteName}"></td>
+            <td th:text="${log.workoutType}"></td>
+            <td th:text="${log.durationMinutes} + ' minutes'"></td>
+            <td th:text="${log.caloriesBurned}"></td>
+            <td th:text="${log.workoutDate}"></td>
+            <td th:text="${log.notes != null ? log.notes : '-'}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
