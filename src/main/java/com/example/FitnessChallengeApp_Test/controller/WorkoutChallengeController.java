@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-/**
- * Controller for FitSquad Hub challenges.
- * Handles challenge browsing, form rendering, and submission with Bean Validation.
- */
+
+ //* Controller for FitSquad Hub challenges.
+ //* Handles challenge browsing, form rendering, and submission with Bean Validation.
+// */
 @Controller
 public class WorkoutChallengeController {
 
