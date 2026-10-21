@@ -1,0 +1,7 @@
+com\example\FitnessChallengeApp_Test\service\ChallengeService.class
+com\example\FitnessChallengeApp_Test\controller\WorkoutLogController.class
+com\example\FitnessChallengeApp_Test\controller\WorkoutChallengeController.class
+com\example\FitnessChallengeApp_Test\model\Challenge.class
+com\example\FitnessChallengeApp_Test\FitnessChallengeAppTestApplication.class
+com\example\FitnessChallengeApp_Test\model\WorkoutLog.class
+com\example\FitnessChallengeApp_Test\service\WorkoutLogService.class
