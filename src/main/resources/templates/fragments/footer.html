@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle} ?: 'Workout Logs'">About</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <footer th:fragment="footer" class="container text-center mt-5 pt-4 border-top border-secondary border-opacity-25 text-secondary small">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+            <div>
+                &copy; 2026 <span class="text-light fw-semibold">FitSquad Hub</span> &bull; Empowering Fitness Communities.
+            </div>
+            <div class="text-muted">
+                Spring Boot MVC &bull; CPAN-228 &bull; Thymeleaf Engine
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
